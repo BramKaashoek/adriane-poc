@@ -1,0 +1,11 @@
+[
+    {"model": "ratings.movie", "pk": 1, "fields": {}},
+    {"model": "ratings.movie", "pk": 2, "fields": {}},
+    {"model": "ratings.movie", "pk": 3, "fields": {}},
+    {"model": "ratings.movie", "pk": 4, "fields": {}},
+    {"model": "ratings.movie", "pk": 5, "fields": {}},
+    {"model": "ratings.movie", "pk": 6, "fields": {}},
+    {"model": "ratings.movie", "pk": 7, "fields": {}},
+    {"model": "ratings.customuser", "pk":1, "fields": {"username": "Bram"}},
+    {"model": "ratings.rating", "pk": 1, "fields": {"movie": 1, "user": 1, "stars": 3.5}}
+]
