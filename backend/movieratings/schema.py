@@ -7,6 +7,7 @@ type_defs = """
     type Query {
         movies: [Movie!]!
         ratings: [Rating!]!
+        movie(input: MovieInput!): Movie!
     }
 
     type Movie {
@@ -32,6 +33,10 @@ type_defs = """
         movieId: Int!
         stars: Float!
     }
+
+    input MovieInput {
+        id: Int!
+    }
 """
 
 query = ObjectType('Query')
@@ -44,6 +49,10 @@ def resolve_movies(*_):
     ids = models.Movie.objects.values_list('id', flat=True)
     movies = [query_movie(id) for id in ids]
     return movies
+
+@query.field("movie")
+def resolve_movie(_, info, input):
+    return query_movie(input['id'])
 
 @movie.field("ratings")
 def resolve_ratings(movie, _):
@@ -76,7 +85,7 @@ def resolve_create_rating(_, info, input):
     res =  models.Rating.objects.create(movie=movie, stars=input['stars'], user=user)
     return {
         "stars": res.stars,
-        "movie": query_movie(res.movie.id),
+        "_movie_id": res.movie.id,
         "user": res.user
     }
 
